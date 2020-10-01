@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AddContact
+      v-if="addConfirm"
+      @closeContact="closeAddContact"/>
+    <ContactsList @addContact="visibleAddContact"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import ContactsList from '@/components/ContactsList.vue';
+import AddContact from '@/components/AddContact.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    ContactsList,
+    AddContact,
+  },
+  data: () => ({
+    addConfirm: false,
+  }),
+  methods: {
+    visibleAddContact(confirm) {
+      this.addConfirm = confirm;
+    },
+    closeAddContact(confirm) {
+      this.addConfirm = confirm;
+    },
   },
 };
 </script>
@@ -23,6 +38,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+body{
+  margin: 0;
 }
 </style>
